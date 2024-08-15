@@ -147,45 +147,47 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Main
-            handleEditAvatar={handleEditAvatar}
-            handleEditProfile={handleEditProfile}
-            handleAddPlace={handleAddPlace}
-            handleDeleteCard={handleDeleteCard}
-            handleCardClick={handleCardClick}
-            handleCardLike={handleCardLike}
-            cards={cards}
-          />
-          <Footer />
-          <EditAvatarPopup
-            handleClose={closeAllPopups}
-            open={isPopupEditAvatar}
-            onUpdateAvatar={onSubmitEditAvatar}
-          />
-          <EditProfilePopup
-            handleClose={closeAllPopups}
-            open={isPopupProfileOpen}
-            onUpdateUser={onSubmitEditProfile}
-          />
-          <AddPlacePopup
-            handleClose={closeAllPopups}
-            open={isPopupAddPlace}
-            onSubmit={onSubmitAddPlace}
-          />
-          <PopupWithForm
-            title="¿Estás seguro/a?"
-            handleClose={closeAllPopups}
-            classId={"popup_confirmation"}
-            open={isPopupDeleteCard}
-            onSubmit={onSubmitDeleteCard}
-            buttonTitle="Si"
-          ></PopupWithForm>
-          <ImagePopup
-            classId={"popup_card"}
-            handleClose={closeAllPopups}
-            selectedCard={selectedCard}
-            open={isPopupImageOpen}
-          />
+          <ProtectedRoute>
+            <Main
+              handleEditAvatar={handleEditAvatar}
+              handleEditProfile={handleEditProfile}
+              handleAddPlace={handleAddPlace}
+              handleDeleteCard={handleDeleteCard}
+              handleCardClick={handleCardClick}
+              handleCardLike={handleCardLike}
+              cards={cards}
+            />
+            <Footer />
+            <EditAvatarPopup
+              handleClose={closeAllPopups}
+              open={isPopupEditAvatar}
+              onUpdateAvatar={onSubmitEditAvatar}
+            />
+            <EditProfilePopup
+              handleClose={closeAllPopups}
+              open={isPopupProfileOpen}
+              onUpdateUser={onSubmitEditProfile}
+            />
+            <AddPlacePopup
+              handleClose={closeAllPopups}
+              open={isPopupAddPlace}
+              onSubmit={onSubmitAddPlace}
+            />
+            <PopupWithForm
+              title="¿Estás seguro/a?"
+              handleClose={closeAllPopups}
+              classId={"popup_confirmation"}
+              open={isPopupDeleteCard}
+              onSubmit={onSubmitDeleteCard}
+              buttonTitle="Si"
+            ></PopupWithForm>
+            <ImagePopup
+              classId={"popup_card"}
+              handleClose={closeAllPopups}
+              selectedCard={selectedCard}
+              open={isPopupImageOpen}
+            />
+          </ProtectedRoute>
         </CurrentUserContext.Provider>
 
         <Route>
