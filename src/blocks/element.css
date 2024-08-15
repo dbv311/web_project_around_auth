@@ -1,0 +1,100 @@
+.element {
+  height: 361px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  font-family: Inter;
+}
+
+.element__picture {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.element__image {
+  width: 282px;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.element__button-trash {
+  background-image: url(../images/Trash.png);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  height: 18px;
+  width: 19px;
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  margin: 18px 15px auto auto;
+}
+
+.element__button-trash:hover {
+  opacity: 60%;
+}
+
+.element__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.element__text {
+  width: 246px;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  text-align: center;
+  color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.element__counter {
+  text-align: center;
+  margin: auto;
+}
+
+.element__button-like {
+  background-image: url(../images/Heart.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  height: 19px;
+  width: 21px;
+  border: none;
+  cursor: pointer;
+}
+
+.element__button-like_active {
+  background-image: url(../images/Union.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.element__button-like:hover {
+  opacity: 60%;
+}
+
+@media screen and (max-width: 767px) {
+  .element__image {
+    display: flex;
+  }
+
+  .element__button-like {
+    padding: 0;
+    height: 17px;
+  }
+}

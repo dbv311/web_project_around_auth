@@ -1,0 +1,159 @@
+.profile {
+  display: flex;
+  justify-content: flex-start;
+  max-height: 120px;
+  margin: 40px auto 50px auto;
+}
+
+.profile__avatar {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.profile__edit-avatar {
+  position: absolute;
+  z-index: 3;
+  border: transparent;
+  background-color: transparent;
+  color: transparent;
+  width: inherit;
+  height: -webkit-fill-available;
+}
+
+.profile__image {
+  display: grid;
+  position: relative;
+  width: 100%;
+  max-width: 120px;
+}
+
+.profile__image::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-image: url(../images/edit.png);
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.profile__image:hover::after {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.profile__info {
+  max-width: 414px;
+  margin: 18px 0 10px 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "title title button"
+    "text . .";
+}
+.profile__edit-button {
+  border: 1px solid #ffffff;
+  width: 24px;
+  height: 24px;
+  grid-area: button;
+  margin-top: 17px;
+  margin-left: 15px;
+  background-color: transparent;
+  cursor: pointer;
+  background-image: url(../images/lapiz.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.profile__text {
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 16px 0 0 0;
+  grid-area: text;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.profile__title {
+  font-family: Inter;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 0;
+  grid-area: title;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.profile__add-button {
+  border: 2px solid #ffffff;
+  background-image: url(../images/Vector.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 150px;
+  height: 50px;
+  border-radius: 2px;
+  margin: 30px 0 10px 168px;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+  }
+  .profile__avatar {
+    display: flex;
+    margin: auto;
+  }
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+
+  .profile__add-button {
+    width: 260px;
+    margin: 20px auto 0;
+  }
+
+  .profile__title {
+    font-size: 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    max-width: 270px;
+  }
+  .profile__text {
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 238px;
+  }
+  .profile__edit-button {
+    margin: 17px 0 0;
+  }
+
+  .profile__image {
+    margin: auto;
+  }
+}
