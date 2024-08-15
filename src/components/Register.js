@@ -1,65 +1,63 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as auth from "../auth.js";
-import "../blocks/login.css";
+import "../blocks/register.css";
 
-export default function Login({ setIsLoggedIn }) {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return;
+    if ((email, password)) {
+      auth
+        .register(email, password)
+        .then((res) => console.log(res))
+        .catch(console.log);
     }
-    auth
-      .login(email, password)
-      .then((res) => {
-        console.log(res);
-        setIsLoggedIn(true);
-      })
-      .catch(console.log);
   };
 
   return (
     <>
-      <div className="login">
-        <p className="login__welcome">Inicia sesión</p>
-        <form className="login_info">
+      <div className="register">
+        <p className="register__welcome">Regístrate</p>
+        <form className="register__form">
           <label htmlFor="email">Correo Electrónico</label>
           <input
             required
             name="email"
             type="email"
-            className="login__input"
+            className="register__input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
-          <span className="login__divider"></span>
+          <span className="register__divider"></span>
           <label htmlFor="password">Contraseña</label>
           <input
             required
             name="password"
             type="password"
-            className="login__input"
+            minLength="8"
+            maxLength="15"
+            className="register__input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
-          <span className="login__divider"></span>
-          <div className="login__button">
+          <span className="register__divider"></span>
+          <div className="register__button">
             <button
               type="submit"
-              className="login__link"
-              handleSubmit={handleSubmit}
+              className="register__link"
+              onClick={handleSubmit}
             >
-              Inicia sesión
+              Regístrate
             </button>
           </div>
         </form>
-        <div className="login__signup">
-          <p>¿Aún no eres miembro? </p>
-          <Link to="register" className="login__signup-link">
-            Registrate aquí
+        <div className="register__signin">
+          <p>¿Ya eres miembro?</p>
+          <Link to="login" className="register__login-link">
+            Inicia sesión aquí
           </Link>
         </div>
       </div>
