@@ -196,6 +196,36 @@
   height: 272px;
 }
 
+.popup__register_alert {
+  background-image: url(../images/check.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-color: transparent;
+  background-position: top;
+  padding-top: 200px;
+  padding-bottom: 70px;
+  color: black;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.popup__register_alert-wrong {
+  background-image: url("../images/x-red.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-color: transparent;
+  background-position: top;
+  padding-top: 200px;
+  padding-bottom: 70px;
+  color: black;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
 @media screen and (max-width: 767px) {
   .popup {
     min-width: 282px;

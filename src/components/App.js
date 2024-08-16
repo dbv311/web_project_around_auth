@@ -9,10 +9,11 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import * as auth from "../auth.js";
 
 function App() {
   const [isPopupProfileOpen, setPopupProfileOpen] = React.useState(false);
@@ -26,6 +27,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const history = useHistory();
 
   const closeAllPopups = () => {
     setPopupProfileOpen(false);
@@ -125,29 +127,42 @@ function App() {
     });
   }, []);
 
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            history.push("/home");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    return;
+  };
+
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+    tokenCheck();
+  };
+
   return (
     <div className="page">
+      <Header />
+      <Register path="/login" handleLogin={handleLogin} />
       <Switch>
         <CurrentUserContext.Provider value={currentUser}>
-          <Header>
-            <ul>
-              <li>
-                <Link to="/register" />
-                Registro
-              </li>
-              <li>
-                <Link to="/login" />
-                Inicio de sesión
-              </li>
-            </ul>
-          </Header>
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/login">
+          <Route path="/login" handleLogin={handleLogin}>
             <Login setIsLoggedIn={setIsLoggedIn} />
           </Route>
-          <ProtectedRoute path="/home">
+          <ProtectedRoute path="/home" isLoggedIn={true}>
             <Main
               handleEditAvatar={handleEditAvatar}
               handleEditProfile={handleEditProfile}
@@ -191,7 +206,7 @@ function App() {
         </CurrentUserContext.Provider>
 
         <Route>
-          {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/login" />}
+          {isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </div>

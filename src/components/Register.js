@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as auth from "../auth.js";
 import "../blocks/register.css";
 import InfoToolTips from "./InfoToolTips.js";
@@ -10,6 +10,8 @@ export default function Register() {
 
   const [open, setOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(true);
+
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ export default function Register() {
             setIsSuccess(false);
           }
           setOpen(true);
+          history.push("/login");
         })
         .catch((error) => {
           console.log(error);

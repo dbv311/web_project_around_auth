@@ -16,7 +16,6 @@ export default function Login({ setIsLoggedIn }) {
     auth
       .login(email, password)
       .then((res) => {
-        console.log(res);
         if (res.token) {
           setIsLoggedIn(true);
           //guardar token
