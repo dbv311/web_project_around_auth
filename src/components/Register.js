@@ -2,18 +2,32 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as auth from "../auth.js";
 import "../blocks/register.css";
+import InfoToolTips from "./InfoToolTips.js";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if ((email, password)) {
       auth
         .register(email, password)
-        .then((res) => console.log(res))
-        .catch(console.log);
+        .then((res) => {
+          console.log(res, res._id);
+          if (!res._id) {
+            setIsSuccess(false);
+          }
+          setOpen(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setOpen(true);
+          setIsSuccess(false);
+        });
     }
   };
 
@@ -21,7 +35,7 @@ export default function Register() {
     <>
       <div className="register">
         <p className="register__welcome">Regístrate</p>
-        <form className="register__form">
+        <form className="register__form" onSubmit={handleSubmit}>
           <label htmlFor="email">Correo Electrónico</label>
           <input
             required
@@ -45,11 +59,7 @@ export default function Register() {
           ></input>
           <span className="register__divider"></span>
           <div className="register__button">
-            <button
-              type="submit"
-              className="register__link"
-              onClick={handleSubmit}
-            >
+            <button type="submit" className="register__link">
               Regístrate
             </button>
           </div>
@@ -61,6 +71,13 @@ export default function Register() {
           </Link>
         </div>
       </div>
+      <InfoToolTips
+        open={open}
+        isSuccess={isSuccess}
+        handleClose={() => {
+          setOpen(false);
+        }}
+      />
     </>
   );
 }

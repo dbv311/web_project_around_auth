@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as auth from "../auth.js";
 import "../blocks/login.css";
 
 export default function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +17,11 @@ export default function Login({ setIsLoggedIn }) {
       .login(email, password)
       .then((res) => {
         console.log(res);
-        setIsLoggedIn(true);
+        if (res.token) {
+          setIsLoggedIn(true);
+          //guardar token
+          history.push("/home");
+        }
       })
       .catch(console.log);
   };
@@ -25,7 +30,7 @@ export default function Login({ setIsLoggedIn }) {
     <>
       <div className="login">
         <p className="login__welcome">Inicia sesión</p>
-        <form className="login_info">
+        <form className="login_info" onSubmit={handleSubmit}>
           <label htmlFor="email">Correo Electrónico</label>
           <input
             required
@@ -47,11 +52,7 @@ export default function Login({ setIsLoggedIn }) {
           ></input>
           <span className="login__divider"></span>
           <div className="login__button">
-            <button
-              type="submit"
-              className="login__link"
-              handleSubmit={handleSubmit}
-            >
+            <button type="submit" className="login__link">
               Inicia sesión
             </button>
           </div>

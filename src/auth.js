@@ -1,6 +1,6 @@
 export const BASE_URL = "https://tripleten.desarrollointerno.com";
 
-export const register = (password, email) => {
+export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -21,7 +21,7 @@ export const register = (password, email) => {
     .catch((err) => console.log(err));
 };
 
-export const login = (password, email) => {
+export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {

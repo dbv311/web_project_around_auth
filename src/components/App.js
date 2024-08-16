@@ -9,7 +9,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import { Route, Switch, Link, useHistory, Redirect } from "react-router-dom";
+import { Route, Switch, Link, Redirect } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/Login";
 import Register from "../components/Register";
@@ -145,9 +145,9 @@ function App() {
             <Register />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login setIsLoggedIn={setIsLoggedIn} />
           </Route>
-          <ProtectedRoute>
+          <ProtectedRoute path="/home">
             <Main
               handleEditAvatar={handleEditAvatar}
               handleEditProfile={handleEditProfile}

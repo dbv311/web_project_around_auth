@@ -1,22 +1,17 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-export default function InfoToolTips({ handleClose, open }) {
+export default function InfoToolTips({ handleClose, open, isSuccess }) {
   return (
     <>
       <PopupWithForm
         handleClose={handleClose}
         open={open}
-        classId={"form__register_success"}
+        classId={isSuccess ? "form__register_success" : "form__register_wrong"}
       >
-        ¡Correcto! Ya estás registrado.
-      </PopupWithForm>
-      <PopupWithForm
-        handleClose={handleClose}
-        open={open}
-        classId={"form__register_wrong"}
-      >
-        Uy, algo salió mal. Por favor, inténtalo de nuevo.
+        {isSuccess
+          ? "¡Correcto! Ya estás registrado."
+          : "Uy, algo salió mal. Por favor, inténtalo de nuevo."}
       </PopupWithForm>
     </>
   );
