@@ -153,7 +153,7 @@ function App() {
   return (
     <div className="page">
       <Header />
-      <Register path="/login" handleLogin={handleLogin} />
+      <Register>{isLoggedIn === <Redirect to="/login" />}</Register>
       <Switch>
         <CurrentUserContext.Provider value={currentUser}>
           <Route path="/register">
