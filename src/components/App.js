@@ -153,16 +153,15 @@ function App() {
   return (
     <div className="page">
       <Header />
-      <Register>{isLoggedIn === <Redirect to="/login" />}</Register>
       <Switch>
         <CurrentUserContext.Provider value={currentUser}>
-          <Route path="/register">
+          <Route path="/">
             <Register />
           </Route>
           <Route path="/login" handleLogin={handleLogin}>
             <Login setIsLoggedIn={setIsLoggedIn} />
           </Route>
-          <ProtectedRoute path="/home" isLoggedIn={true}>
+          <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
             <Main
               handleEditAvatar={handleEditAvatar}
               handleEditProfile={handleEditProfile}
@@ -205,7 +204,7 @@ function App() {
           </ProtectedRoute>
         </CurrentUserContext.Provider>
 
-        <Route>
+        <Route path="/">
           {isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/login" />}
         </Route>
       </Switch>

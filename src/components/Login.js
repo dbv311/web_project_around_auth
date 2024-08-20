@@ -18,7 +18,6 @@ export default function Login({ setIsLoggedIn }) {
       .then((res) => {
         if (res.token) {
           setIsLoggedIn(true);
-          //guardar token
           history.push("/home");
         }
       })
