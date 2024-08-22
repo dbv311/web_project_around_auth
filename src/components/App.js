@@ -13,7 +13,7 @@ import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import * as auth from "../auth.js";
+import * as auth from "../utils/auth.js";
 
 function App() {
   const [isPopupProfileOpen, setPopupProfileOpen] = React.useState(false);
@@ -151,15 +151,15 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <Header />
-      <Switch>
-        <CurrentUserContext.Provider value={currentUser}>
-          <Route path="/">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header />
+        <Switch>
+          <Route path="/register">
             <Register />
           </Route>
-          <Route path="/login" handleLogin={handleLogin}>
-            <Login setIsLoggedIn={setIsLoggedIn} />
+          <Route path="/login">
+            <Login setIsLoggedIn={setIsLoggedIn} handleLogin={handleLogin} />
           </Route>
           <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
             <Main
@@ -202,13 +202,13 @@ function App() {
               open={isPopupImageOpen}
             />
           </ProtectedRoute>
-        </CurrentUserContext.Provider>
 
-        <Route path="/">
-          {isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/login" />}
-        </Route>
-      </Switch>
-    </div>
+          <Route exact path="/">
+            {isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/register" />}
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import * as auth from "../auth.js";
+import * as auth from "../utils/auth.js";
 import "../blocks/register.css";
 import InfoToolTips from "./InfoToolTips.js";
 
