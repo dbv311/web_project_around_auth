@@ -1,13 +1,29 @@
 import PopupWithForm from "./PopupWithForm";
 
 export default function AddPlacePopup({ open, handleClose, onSubmit }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(getInputValues(event.target));
+  };
+
+  const getInputValues = (form) => {
+    const inputValues = {};
+    const inputForms = Array.from(form.elements);
+    inputForms.forEach((element) => {
+      if (element.name) {
+        inputValues[element.name] = element.value;
+      }
+    });
+    return inputValues;
+  };
+
   return (
     <PopupWithForm
       title="Nuevo Lugar"
       handleClose={handleClose}
       classId={"popup_place"}
       open={open}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       buttonTitle="Guardar"
     >
       <input

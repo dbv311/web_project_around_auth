@@ -16,6 +16,7 @@ export default function Login({ setIsLoggedIn, email, setEmail }) {
       .login(email, password)
       .then((res) => {
         if (res.token) {
+          localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
           history.push("/home");
         }

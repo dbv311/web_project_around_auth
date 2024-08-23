@@ -39,7 +39,7 @@ export default function EditProfilePopup({ handleClose, open, onUpdateUser }) {
           onChange={(e) => setName(e.target.value)}
           placeholder="Nombre"
           name="name"
-          value={name}
+          defaultValue={name}
           required
         />
         <span className="popup__error popup__error_type_name"></span>
@@ -51,7 +51,7 @@ export default function EditProfilePopup({ handleClose, open, onUpdateUser }) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Acerca de mi"
           name="about"
-          value={description}
+          defaultValue={description}
           required
         />
         <span className="popup__error popup__error_type_about"></span>

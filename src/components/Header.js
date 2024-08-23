@@ -2,7 +2,7 @@ import logo from "../images/logo.png";
 import "../blocks/header.css";
 import { Link, useLocation } from "react-router-dom";
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, handleLogout }) {
   const location = useLocation();
 
   return (
@@ -20,9 +20,9 @@ function Header({ isLoggedIn }) {
             </Link>
           ))}
         {isLoggedIn && (
-          <Link to="login" className="header__login">
+          <p onClick={handleLogout} className="header__login">
             Cerrar sesión
-          </Link>
+          </p>
         )}
       </p>
 

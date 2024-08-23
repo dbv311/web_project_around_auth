@@ -121,15 +121,27 @@ function App() {
     }
   };
   React.useEffect(() => {
-    api.getUserInfo().then((user) => {
-      setCurrentUser(user);
-      api.getCards().then((cardsData) => {
-        setCards(cardsData);
+    if (isLoggedIn) {
+      api.getUserInfo().then((user) => {
+        setCurrentUser(user);
+        api.getCards().then((cardsData) => {
+          setCards(cardsData);
+        });
       });
-    });
+    }
+  }, [isLoggedIn]);
+
+  React.useEffect(() => {
+    tokenCheck();
   }, []);
 
-  console.log(currentUser);
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setCurrentUser({});
+    setIsLoggedIn(false);
+    history.push("/login");
+  };
+  //console.log(currentUser);
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
@@ -157,7 +169,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header isLoggedIn={isLoggedIn} email={email} />
+        <Header
+          isLoggedIn={isLoggedIn}
+          email={email}
+          handleLogout={handleLogout}
+        />
         <Switch>
           <Route path="/register">
             <Register />
