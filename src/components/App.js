@@ -27,6 +27,8 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+
   const history = useHistory();
 
   const closeAllPopups = () => {
@@ -127,6 +129,8 @@ function App() {
     });
   }, []);
 
+  console.log(currentUser);
+
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
 
@@ -153,13 +157,18 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header isLoggedIn={isLoggedIn} email={email} />
         <Switch>
           <Route path="/register">
             <Register />
           </Route>
           <Route path="/login">
-            <Login setIsLoggedIn={setIsLoggedIn} handleLogin={handleLogin} />
+            <Login
+              setIsLoggedIn={setIsLoggedIn}
+              handleLogin={handleLogin}
+              email={email}
+              setEmail={setEmail}
+            />
           </Route>
           <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
             <Main

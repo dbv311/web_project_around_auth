@@ -3,8 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as auth from "../utils/auth.js";
 import "../blocks/login.css";
 
-export default function Login({ setIsLoggedIn }) {
-  const [email, setEmail] = useState("");
+export default function Login({ setIsLoggedIn, email, setEmail }) {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
